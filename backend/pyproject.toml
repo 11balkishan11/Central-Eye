@@ -1,0 +1,38 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "alembic>=1.18.5",
+    "asyncpg>=0.31.0",
+    "email-validator>=2.3.0",
+    "fastapi[standard]>=0.139.2",
+    "psycopg2-binary>=2.9.12",
+    "pwdlib[argon2]>=0.3.0",
+    "pydantic>=2.13.4",
+    "pydantic-settings>=2.14.2",
+    "pyjwt[crypto]>=2.13.0",
+    "sqlalchemy>=2.0.51",
+    "uvicorn[standard]>=0.51.0",
+]
+
+[dependency-groups]
+dev = [
+    "aiosqlite>=0.22.1",
+    "bandit>=1.8.3",
+    "httpx>=0.28.1",
+    "mypy>=2.3.0",
+    "pip-audit>=2.8.0",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=6.0.0",
+    "pytest-mock>=3.15.1",
+    "ruff>=0.15.22",
+    "testcontainers[postgres]>=4.9.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
