@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/components/ui
 import { Building2, MapPin, Router, Server, ServerCrash, Activity, ArrowUpRight, ArrowDownRight, Clock, AlertTriangle, CheckCircle2, Info } from "lucide-react";
 import { useDemoDataEngine } from "../hooks/useDemoDataEngine";
 import { CpuChart, MemoryChart, NetworkChart, HealthDonutChart } from "../components/DashboardCharts";
+import { useCollectors } from "@/features/devices/hooks/useLookups";
 
 export function DashboardPage() {
   const { data: orgData } = useOrganizations({ limit: 1 });
@@ -11,7 +12,16 @@ export function DashboardPage() {
   // We use the real counts but force them to minimums for demo purposes if empty
   const totalOrgs = Math.max(orgData?.total || 0, 14);
   const totalSites = Math.max(siteData?.total || 0, 38);
-  const totalCollectors = 6;
+  const { data: collectors } = useCollectors();
+  const totalCollectors = collectors?.length || 0;
+  
+  // A collector is online if it has sent a heartbeat in the last 180 seconds
+  const onlineCollectors = (collectors || []).filter((c: any) => {
+    if (!c.last_heartbeat) return false;
+    const heartbeat = new Date(c.last_heartbeat);
+    const now = new Date();
+    return (now.getTime() - heartbeat.getTime()) < 180000;
+  }).length;
   const totalDevices = 512;
   const healthyDevices = 480;
   const warningDevices = 21;
@@ -75,7 +85,7 @@ export function DashboardPage() {
             <div className="text-3xl font-bold">{totalCollectors}</div>
             <div className="flex items-center text-xs mt-1 text-green-500">
               <span className="flex h-2 w-2 rounded-full bg-green-500 mr-2 animate-pulse"></span>
-              All collectors online
+              {onlineCollectors} online
             </div>
           </CardContent>
         </Card>

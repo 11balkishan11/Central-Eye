@@ -5,7 +5,7 @@ import uuid
 from datetime import datetime
 from typing import Optional, List, TYPE_CHECKING
 
-from sqlalchemy import String, Enum, ForeignKey, DateTime, Float, Integer, Boolean, UniqueConstraint, Index, text
+from sqlalchemy import String, Enum, ForeignKey, DateTime, Float, Integer, Boolean, UniqueConstraint, Index, text, func
 from sqlalchemy.dialects.postgresql import INET, MACADDR, JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -55,10 +55,6 @@ class InterfaceAdminState(str, enum.Enum):
     down = "down"
     testing = "testing"
 
-class CollectorStatus(str, enum.Enum):
-    active = "active"
-    offline = "offline"
-
 # -----------------
 # Profiles & Configs
 # -----------------
@@ -102,15 +98,35 @@ class SNMPProfile(Base):
         UniqueConstraint("tenant_id", "name", name="uq_snmp_profile_tenant_name"),
     )
 
+class CollectorRegistrationKey(Base):
+    __tablename__ = "collector_registration_keys"
+    tenant_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("tenants.id", ondelete="CASCADE"), index=True)
+    site_id: Mapped[Optional[uuid.UUID]] = mapped_column(ForeignKey("sites.id", ondelete="CASCADE"), index=True)
+    key_hash: Mapped[str] = mapped_column(String, unique=True, index=True)
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    max_registrations: Mapped[int] = mapped_column(Integer, default=1)
+    used_count: Mapped[int] = mapped_column(Integer, default=0)
+    created_by: Mapped[Optional[uuid.UUID]] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    revoked_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), default=None)
+    last_used_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), default=None)
+    notes: Mapped[Optional[str]] = mapped_column(String, nullable=True)
+
 class Collector(Base):
     __tablename__ = "collectors"
     tenant_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("tenants.id", ondelete="CASCADE"), index=True)
     site_id: Mapped[Optional[uuid.UUID]] = mapped_column(ForeignKey("sites.id", ondelete="SET NULL"), index=True)
     name: Mapped[str] = mapped_column(String, index=True)
-    status: Mapped[CollectorStatus] = mapped_column(Enum(CollectorStatus, native_enum=True), default=CollectorStatus.offline)
-    last_heartbeat: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
+    
+    # Machine Fingerprint & Identity
+    machine_id: Mapped[str] = mapped_column(String, unique=True, index=True)
+    platform: Mapped[Optional[str]] = mapped_column(String)
+    python_version: Mapped[Optional[str]] = mapped_column(String)
     version: Mapped[Optional[str]] = mapped_column(String)
+    
+    # Status & Telemetry
+    last_heartbeat: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
     capacity_percent: Mapped[float] = mapped_column(Float, default=0.0)
+    capabilities: Mapped[list[str]] = mapped_column(JSONB, default=list)
 
     __table_args__ = (
         UniqueConstraint("site_id", "name", name="uq_collector_site_name"),

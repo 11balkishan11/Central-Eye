@@ -97,3 +97,45 @@ class TokenService:
             }
         )
 
+    @staticmethod
+    def create_collector_token(
+        subject: str,
+        token_type: str,
+        audience: str,
+        expires_delta: timedelta
+    ) -> str:
+        now = datetime.now(timezone.utc)
+        expire = now + expires_delta
+        jti = str(uuid.uuid4())
+        
+        to_encode = {
+            "sub": subject,
+            "jti": jti,
+            "type": token_type,
+            "iss": settings.JWT_ISSUER,
+            "aud": audience,
+            "iat": now,
+            "nbf": now,
+            "exp": expire,
+        }
+        
+        return jwt.encode(
+            to_encode, 
+            settings.JWT_SECRET_KEY, 
+            algorithm=settings.JWT_ALGORITHM
+        )
+
+    @staticmethod
+    def decode_collector_token(token: str, audience: str) -> Dict[str, Any]:
+        return jwt.decode(
+            token,
+            settings.JWT_SECRET_KEY,
+            algorithms=[settings.JWT_ALGORITHM],
+            issuer=settings.JWT_ISSUER,
+            audience=audience,
+            options={
+                "require": ["exp", "iss", "aud", "nbf", "sub", "jti", "type"]
+            }
+        )
+
+

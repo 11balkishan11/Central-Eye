@@ -9,6 +9,7 @@ from app.models.device import (
     Interface, MetricDefinition, MetricSeries, CollectorRole
 )
 from app.models.event import OutboxEvent
+from app.models.job import CollectorJob, CollectorEvent
 
 # For Alembic autogenerate to discover the models
 __all__ = [
@@ -39,4 +40,6 @@ __all__ = [
     "MetricSeries",
     "CollectorRole",
     "OutboxEvent",
+    "CollectorJob",
+    "CollectorEvent",
 ]

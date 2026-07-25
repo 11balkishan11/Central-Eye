@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.api.v1.endpoints import health, organizations, sites, invitations, devices, lookups, auth
+from app.api.v1.endpoints import health, organizations, sites, invitations, devices, lookups, auth, collectors
 
 api_router = APIRouter()
 
@@ -11,3 +11,4 @@ api_router.include_router(sites.router, prefix="/sites", tags=["Sites"]) # For e
 api_router.include_router(invitations.router, tags=["Invitations"])
 api_router.include_router(devices.router, prefix="/devices", tags=["Devices"])
 api_router.include_router(lookups.router, tags=["Lookups"])
+api_router.include_router(collectors.router, prefix="/collectors", tags=["Collectors"])

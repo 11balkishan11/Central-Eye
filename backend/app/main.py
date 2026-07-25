@@ -1,11 +1,25 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+import asyncio
+
 from app.core.middleware import RequestIdMiddleware
 from app.api.exceptions import setup_exception_handlers
 from app.api.v1.endpoints.auth import router as auth_router
 from app.api.v1.api import api_router
+from app.tasks.collector_cleanup import collector_cleanup_task, registration_key_cleanup_task
 
-app = FastAPI(title="Central Eye API", version="1.0.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Start background tasks
+    task1 = asyncio.create_task(collector_cleanup_task())
+    task2 = asyncio.create_task(registration_key_cleanup_task())
+    yield
+    # Cleanup tasks
+    task1.cancel()
+    task2.cancel()
+
+app = FastAPI(title="Central Eye API", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(RequestIdMiddleware)
 app.add_middleware(
