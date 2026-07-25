@@ -142,9 +142,9 @@ export function DashboardPage() {
       </div>
 
       {/* Third Row: Timeline, Health Donut, Recent Devices */}
-      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6 h-[400px]">
+      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6 h-auto lg:h-[400px]">
         {/* Timeline */}
-        <Card className="col-span-3 lg:col-span-2 shadow-sm overflow-hidden flex flex-col">
+        <Card className="col-span-3 lg:col-span-2 shadow-sm overflow-hidden flex flex-col min-h-[350px] lg:min-h-0">
           <CardHeader className="pb-3 border-b border-border/50 bg-muted/20">
             <CardTitle className="text-base font-semibold flex items-center">
               <Clock className="w-4 h-4 mr-2 text-muted-foreground" />
@@ -173,7 +173,7 @@ export function DashboardPage() {
         </Card>
 
         {/* Health Distribution */}
-        <Card className="col-span-3 lg:col-span-2 shadow-sm">
+        <Card className="col-span-3 lg:col-span-2 shadow-sm min-h-[350px] lg:min-h-0">
           <CardHeader className="pb-0 text-center">
             <CardTitle className="text-base font-semibold">Health Distribution</CardTitle>
           </CardHeader>
@@ -183,7 +183,7 @@ export function DashboardPage() {
         </Card>
 
         {/* Recent Devices */}
-        <Card className="col-span-3 lg:col-span-2 shadow-sm overflow-hidden flex flex-col">
+        <Card className="col-span-3 lg:col-span-2 shadow-sm overflow-hidden flex flex-col min-h-[350px] lg:min-h-0">
           <CardHeader className="pb-3 border-b border-border/50 bg-muted/20">
             <CardTitle className="text-base font-semibold flex items-center">
               <Server className="w-4 h-4 mr-2 text-muted-foreground" />
@@ -205,11 +205,11 @@ export function DashboardPage() {
                       <Router className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="text-sm font-medium leading-none">{device.name}</p>
+                      <p className="text-sm font-medium leading-none truncate max-w-[120px] sm:max-w-none">{device.name}</p>
                       <p className="text-xs text-muted-foreground mt-1">{device.ip}</p>
                     </div>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right flex-shrink-0">
                     <p className={`text-xs font-semibold ${device.status === 'Healthy' ? 'text-green-500' : device.status === 'Warning' ? 'text-amber-500' : 'text-red-500'}`}>
                       {device.status}
                     </p>
