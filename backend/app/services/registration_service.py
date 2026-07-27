@@ -3,6 +3,7 @@ from sqlalchemy.future import select
 from fastapi import HTTPException
 from datetime import datetime, timezone, timedelta
 import uuid
+from typing import cast
 from pwdlib import PasswordHash
 from pwdlib.hashers.argon2 import Argon2Hasher
 
@@ -32,7 +33,7 @@ class RegistrationService:
         
         valid_key = None
         for k in keys:
-            if password_hash.verify(request.registration_key, k.key_hash):
+            if password_hash.verify(request.registration_key, cast(str, k.key_hash)):
                 valid_key = k
                 break
                 
@@ -99,9 +100,9 @@ class RegistrationService:
         )
         
         return RegistrationResponse(
-            collector_id=collector.id,
-            tenant_id=collector.tenant_id,
-            site_id=collector.site_id,
+            collector_id=cast(uuid.UUID, collector.id),
+            tenant_id=cast(uuid.UUID, collector.tenant_id),
+            site_id=cast(uuid.UUID | None, collector.site_id),
             access_token=access_token,
             refresh_token=refresh_token
         )
@@ -117,7 +118,7 @@ class RegistrationService:
             raise HTTPException(status_code=401, detail="Invalid refresh token")
             
         access_token = self.token_service.create_collector_token(
-            subject=collector_id,
+            subject=cast(str, collector_id),
             token_type="collector_access",
             audience=settings.JWT_ACCESS_AUDIENCE,
             expires_delta=timedelta(minutes=30)

@@ -4,6 +4,7 @@ from sqlalchemy import update, or_, and_
 from uuid import UUID
 import uuid
 from datetime import datetime, timezone, timedelta
+from typing import cast, Dict, Any
 from fastapi import HTTPException
 
 from app.models.device import Collector
@@ -54,9 +55,9 @@ class CollectorService:
             job_definitions.append(JobDefinition(
                 job_id=job.id,
                 type=job.type.value,
-                payload=job.payload,
+                payload=cast(Dict[str, Any], job.payload),
                 lease_token=lease_token,
-                lease_expires_at=job.lease_expires_at
+                lease_expires_at=cast(datetime, job.lease_expires_at)
             ))
             
             event = CollectorEvent(

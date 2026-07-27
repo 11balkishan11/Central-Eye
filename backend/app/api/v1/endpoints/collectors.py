@@ -36,7 +36,10 @@ async def refresh_collector_token(
     x_correlation_id: Optional[str] = Header(None)
 ):
     service = RegistrationService(db)
-    return await service.refresh_token(refresh_token.get("refresh_token"), x_correlation_id)
+    token_str = refresh_token.get("refresh_token")
+    if not token_str:
+        raise HTTPException(status_code=400, detail="Missing refresh_token")
+    return await service.refresh_token(token_str, x_correlation_id)
 
 @router.post("/{collector_id}/heartbeat", response_model=HeartbeatResponse)
 async def collector_heartbeat(

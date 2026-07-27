@@ -20,7 +20,7 @@ class TokenService:
         expire = now + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
         jti = str(uuid.uuid4())
         
-        to_encode = {
+        to_encode: Dict[str, Any] = {
             "sub": subject,
             "sid": session_id,
             "jti": jti,
@@ -59,7 +59,7 @@ class TokenService:
         expire = now + timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
         jti = str(uuid.uuid4())
         
-        to_encode = {
+        to_encode: Dict[str, Any] = {
             "sub": subject,
             "sid": session_id,
             "fid": family_id,
@@ -108,7 +108,7 @@ class TokenService:
         expire = now + expires_delta
         jti = str(uuid.uuid4())
         
-        to_encode = {
+        to_encode: Dict[str, Any] = {
             "sub": subject,
             "jti": jti,
             "type": token_type,

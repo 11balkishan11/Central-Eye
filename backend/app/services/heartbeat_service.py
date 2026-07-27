@@ -10,7 +10,7 @@ class HeartbeatService:
 
     async def process_heartbeat(self, collector: Collector, request: HeartbeatRequest, correlation_id: str | None = None) -> HeartbeatResponse:
         collector.last_heartbeat = datetime.now(timezone.utc)
-        collector.capacity_percent = float(request.cpu_percent)
+        collector.capacity_percent = request.cpu_percent
         
         event = CollectorEvent(
             tenant_id=collector.tenant_id,

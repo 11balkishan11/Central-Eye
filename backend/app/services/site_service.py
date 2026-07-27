@@ -3,7 +3,7 @@ from typing import List, Optional, Tuple
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, func
 from fastapi import HTTPException, status
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.models.tenant import Site, SiteStatus, Organization
 from app.schemas.site import SiteCreate, SiteUpdate
@@ -128,7 +128,7 @@ class SiteService:
 
     async def soft_delete(self, site_id: uuid.UUID, org_id: uuid.UUID, user_id: uuid.UUID, reason: str = "Manual") -> None:
         site = await self.get_by_id(site_id, org_id)
-        site.deleted_at = datetime.utcnow()
+        site.deleted_at = datetime.now(timezone.utc)
         site.deleted_by = user_id
         site.delete_reason = reason
         await self.db.flush()
@@ -166,7 +166,7 @@ class SiteService:
         site.deleted_at = None
         site.deleted_by = None
         site.delete_reason = None
-        site.restored_at = datetime.utcnow()
+        site.restored_at = datetime.now(timezone.utc)
         site.restored_by = user_id
         
         await self.db.flush()

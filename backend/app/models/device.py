@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import enum
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, List, TYPE_CHECKING
 
 from sqlalchemy import String, Enum, ForeignKey, DateTime, Float, Integer, Boolean, UniqueConstraint, Index, text, func
@@ -243,7 +243,7 @@ class DeviceCollectorAssignment(Base):
     device_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("devices.id", ondelete="CASCADE"), index=True)
     collector_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("collectors.id", ondelete="CASCADE"), index=True)
     role: Mapped[CollectorRole] = mapped_column(Enum(CollectorRole, native_enum=True), default=CollectorRole.primary)
-    assigned_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
+    assigned_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
     __table_args__ = (
         UniqueConstraint("device_id", "collector_id", name="uq_device_collector"),

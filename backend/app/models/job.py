@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import enum
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 
 from sqlalchemy import String, Enum, ForeignKey, DateTime, Integer, text
@@ -40,8 +40,8 @@ class CollectorJob(Base):
     
     payload: Mapped[dict] = mapped_column(JSONB, default=dict)
     
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow)
-    scheduled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow, index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    scheduled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
     lease_expires_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True), index=True)
     
     started_at: Mapped[Optional[datetime]] = mapped_column(DateTime(timezone=True))
@@ -72,7 +72,7 @@ class CollectorEvent(Base):
     collector_id: Mapped[Optional[uuid.UUID]] = mapped_column(ForeignKey("collectors.id", ondelete="SET NULL"), index=True)
     
     event_type: Mapped[CollectorEventType] = mapped_column(Enum(CollectorEventType, native_enum=True), index=True)
-    timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=datetime.utcnow, index=True)
+    timestamp: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
     
     details: Mapped[Optional[dict]] = mapped_column(JSONB)
     correlation_id: Mapped[Optional[str]] = mapped_column(String, index=True)
