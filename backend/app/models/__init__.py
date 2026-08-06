@@ -18,7 +18,7 @@ from app.models.policy import Policy, PolicyVersion, PolicyAssignment
 from app.models.finding import PolicyEvaluation, Finding, FindingState, Evidence
 from app.models.platform_event import PlatformEvent
 from app.models.incident import Incident
-from app.models.automation import AutomationPlan, AutomationExecution, ExecutionStepResult
+from app.models.automation import AutomationPlan, AutomationExecution, ExecutionStepResult  # noqa: F401
 
 # For Alembic autogenerate to discover the models
 __all__ = [

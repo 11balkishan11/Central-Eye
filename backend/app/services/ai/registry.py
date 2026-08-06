@@ -1,5 +1,4 @@
-from typing import Dict, Any, Type, Optional
-from app.services.ai.schemas import AIRequest, AIResponse
+from typing import Dict, Any
 
 class AIRegistry:
     """

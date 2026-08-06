@@ -48,7 +48,7 @@ class TopologyProjectionBuilder(ProjectionHandler):
         }
         
         # Prevent duplicates
-        if not any(l["source"] == new_link["source"] and l["target"] == new_link["target"] for l in model.links):
+        if not any(lnk["source"] == new_link["source"] and lnk["target"] == new_link["target"] for lnk in model.links):
             model.links.append(new_link)
             
         # Due to SQLAlchemy JSON tracking, we must force the update

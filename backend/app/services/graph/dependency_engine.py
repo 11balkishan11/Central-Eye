@@ -1,8 +1,7 @@
 import uuid
-from typing import Dict, Any, List
+from typing import Dict, Any
 from sqlalchemy.orm import Session
 
-from app.models.resource import Resource
 from app.services.graph.graph_query_service import GraphQueryService
 
 class DependencyEngine:

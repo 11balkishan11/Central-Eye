@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import List, Optional
+from typing import List
 import uuid
-import json
 from sqlalchemy.orm import Session
-from sqlalchemy import Column, String, Integer, DateTime, JSON
+from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from datetime import datetime, timezone
 

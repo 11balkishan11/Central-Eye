@@ -1,6 +1,6 @@
 import uuid
-from typing import Any, Dict
-from fastapi import APIRouter, Depends, HTTPException
+from typing import Any
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
 
@@ -14,8 +14,6 @@ from app.services.ai.reasoning_pipeline import ReasoningPipeline
 from app.services.ai.schemas import AIResponse
 
 # Load agents into registry
-import app.services.ai.agents.executive_summary_agent
-import app.services.ai.agents.root_cause_agent
 
 router = APIRouter()
 

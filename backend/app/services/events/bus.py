@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from typing import Callable, Dict, List, Any
-import asyncio
 class DomainEventBus(ABC):
     """
     Abstract interface for Domain Event transport.

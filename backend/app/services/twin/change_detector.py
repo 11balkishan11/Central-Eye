@@ -1,4 +1,3 @@
-from typing import Optional
 from sqlalchemy.orm import Session
 from app.models.observation import Observation
 from app.models.digital_twin import FactVersion
@@ -19,7 +18,7 @@ class ChangeDetector:
             
         current_fact = self.db.query(FactVersion).filter(
             FactVersion.resource_id == observation.resource_id,
-            FactVersion.valid_to == None
+            FactVersion.valid_to.is_(None)
         ).order_by(FactVersion.valid_from.desc()).first()
         
         if not current_fact:

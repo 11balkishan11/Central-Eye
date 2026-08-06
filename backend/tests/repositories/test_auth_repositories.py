@@ -5,7 +5,7 @@ from unittest.mock import AsyncMock, MagicMock
 import pytest
 
 from app.auth.repository import UserRepository, TenantMembershipRepository, SessionRepository, LoginAttemptRepository
-from app.models.user import User, UserSession, LoginAttempt
+from app.models.user import UserSession, LoginAttempt
 
 @pytest.fixture
 def mock_session():

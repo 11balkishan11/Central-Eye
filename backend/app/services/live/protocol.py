@@ -1,6 +1,6 @@
 from enum import Enum
 from pydantic import BaseModel, Field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 class DeliveryPolicy(str, Enum):
     FIRE_AND_FORGET = "fire_and_forget"

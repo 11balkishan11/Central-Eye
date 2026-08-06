@@ -1,4 +1,3 @@
-import pytest
 import uuid
 from app.models.observation import Observation
 from app.services.twin.measurement_router import MeasurementRouter

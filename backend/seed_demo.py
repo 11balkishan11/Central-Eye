@@ -1,5 +1,4 @@
 import asyncio
-import uuid
 import random
 from datetime import datetime, timedelta
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
@@ -75,8 +74,6 @@ async def seed_demo():
             types = ["Core Router", "Distribution Switch", "Firewall", "Server", "UPS", "Wireless Controller", "NAS", "Printer"]
             
             site_list = list(sites.values())
-            
-            devices_to_add = []
             for i in range(needed):
                 site = random.choice(site_list)
                 vendor = random.choice(vendors)

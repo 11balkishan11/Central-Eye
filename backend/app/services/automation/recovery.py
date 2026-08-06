@@ -1,4 +1,3 @@
-from typing import Any
 from sqlalchemy.orm import Session
 from app.models.automation import AutomationExecution
 from app.services.automation.registry import AutomationRegistry
@@ -43,7 +42,7 @@ class RollbackEngine:
                 params = {} 
                 action.rollback(context, params, step.output or {})
                 step.status = "ROLLED_BACK"
-            except Exception as e:
+            except Exception:
                 # If a rollback fails, we definitely need human intervention
                 execution.status = "MANUAL_INTERVENTION_REQUIRED"
                 self.db.commit()

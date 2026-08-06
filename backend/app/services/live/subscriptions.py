@@ -1,10 +1,8 @@
 from pydantic import BaseModel, Field
-from typing import Dict, List, Optional, Any
-import time
+from typing import Dict, List, Optional
 
 from app.services.live.protocol import DeliveryPolicy
 from app.services.queries.schema import QueryFilter
-from app.services.live.session import LiveSession
 
 class Subscription(BaseModel):
     subscription_id: str

@@ -1,6 +1,5 @@
 from sqlalchemy.orm import Session
 from app.models.finding import PolicyEvaluation, Finding, FindingState
-import uuid
 
 class FindingGenerator:
     def __init__(self, db: Session):

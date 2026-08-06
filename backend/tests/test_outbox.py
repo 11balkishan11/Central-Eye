@@ -1,7 +1,6 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import uuid
 
 from app.models.base import Base
 from app.models.events import OutboxEvent, StoredEvent, DeadLetter, SubscriberCheckpoint

@@ -9,11 +9,11 @@ from pwdlib.hashers.argon2 import Argon2Hasher
 
 password_hash = PasswordHash((Argon2Hasher(),))
 
-from app.models.device import CollectorRegistrationKey, Collector
-from app.schemas.registration import RegistrationRequest, RegistrationResponse
-from app.auth.token_service import TokenService
-from app.core.config import settings
-from app.models.job import CollectorEvent, CollectorEventType
+from app.models.device import CollectorRegistrationKey, Collector  # noqa: E402
+from app.schemas.registration import RegistrationRequest, RegistrationResponse  # noqa: E402
+from app.auth.token_service import TokenService  # noqa: E402
+from app.core.config import settings  # noqa: E402
+from app.models.job import CollectorEvent, CollectorEventType  # noqa: E402
 
 
 class RegistrationService:
@@ -27,7 +27,7 @@ class RegistrationService:
         # Alternatively, find keys that are not expired and not revoked.
         result = await self.db.execute(
             select(CollectorRegistrationKey)
-            .where(CollectorRegistrationKey.revoked_at == None)
+            .where(CollectorRegistrationKey.revoked_at.is_(None))
         )
         keys = result.scalars().all()
         

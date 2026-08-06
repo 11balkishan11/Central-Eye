@@ -1,4 +1,3 @@
-from typing import Dict, Any, Optional
 from app.runtime.context import RuntimeContext
 from app.runtime.config import ConfigurationService
 
@@ -33,7 +32,7 @@ class RuntimePolicyEngine:
         """
         Example policy: API Rate limits per tenant.
         """
-        api_rate_limit = ConfigurationService.get("runtime.tenant.api_rate_limit", 1000)
+        _ = ConfigurationService.get("runtime.tenant.api_rate_limit", 1000)
         return True
         
     @classmethod

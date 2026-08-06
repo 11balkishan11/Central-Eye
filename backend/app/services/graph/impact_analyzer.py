@@ -1,4 +1,3 @@
-import uuid
 from typing import Dict, Any, List
 from sqlalchemy.orm import Session
 from app.models.resource import Resource

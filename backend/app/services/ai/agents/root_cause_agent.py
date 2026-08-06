@@ -1,5 +1,3 @@
-from typing import Any
-import uuid
 
 from app.services.ai.registry import AIRegistry
 from app.services.ai.schemas import AIRequest, AIResponse

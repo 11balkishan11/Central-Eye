@@ -1,8 +1,7 @@
 import uuid
-from typing import Dict, Any, List
 from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-from app.models.automation import AutomationExecution, AutomationPlan, ExecutionStepResult
+from app.models.automation import AutomationExecution, ExecutionStepResult
 from app.services.automation.context import ExecutionContext
 from app.services.automation.registry import AutomationRegistry
 from app.services.knowledge.models import InfrastructureKnowledge

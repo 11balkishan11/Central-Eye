@@ -17,7 +17,7 @@ class GraphRepository:
             WHERE (rel.source_id = :res_id OR rel.target_id = :res_id)
               AND r.id != :res_id
         """)
-        result = self.db.execute(sql, {"res_id": resource_id})
+        self.db.execute(sql, {"res_id": resource_id})
         # Assuming we just map directly to Resource model instances
         # A more robust implementation would use SQLAlchemy ORM loading
         # For Sprint 3 MVP, we just rely on ORM:

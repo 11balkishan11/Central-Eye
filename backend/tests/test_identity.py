@@ -1,6 +1,4 @@
-import pytest
 from app.services.identity.extractor import IdentityExtractor
-from app.services.identity.resolver import IdentityResolver
 from app.services.identity.fingerprint import ResourceFingerprintEngine
 
 def test_identity_extraction():

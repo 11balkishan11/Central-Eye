@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone
+from datetime import datetime
 import uuid
 
 from app.models.events import SubscriberCheckpoint

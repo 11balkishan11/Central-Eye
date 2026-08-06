@@ -1,12 +1,11 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from datetime import datetime, timezone
 import uuid
 
 from app.models.base import Base
 from app.services.events.bus import InMemoryDomainEventBus
-from app.services.events.domain import FactUpdated, ResourceStateChanged, RelationshipAdded
+from app.services.events.domain import FactUpdated, RelationshipAdded
 from app.services.projections.registry import ProjectionRegistry
 from app.services.projections.engine import ProjectionEngine
 from app.services.projections.builders.inventory import InventoryProjectionBuilder

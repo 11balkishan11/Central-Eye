@@ -50,7 +50,7 @@ class SchedulerService:
             # Fetch all active devices that support ICMP
             stmt = select(Device).where(
                 Device.deleted_at.is_(None),
-                Device.supports_icmp == True
+                Device.supports_icmp.is_(True)
             )
             result = await db.execute(stmt)
             devices = result.scalars().all()

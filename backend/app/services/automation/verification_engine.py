@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
-from app.models.automation import AutomationPlan, AutomationExecution
+from app.models.automation import AutomationExecution
 
 class VerificationRule(ABC):
     @abstractmethod

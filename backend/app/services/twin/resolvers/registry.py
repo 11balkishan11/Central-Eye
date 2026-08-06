@@ -1,4 +1,4 @@
-from typing import Dict, Type
+from typing import Dict
 from app.services.twin.resolvers.base import ConflictResolver, StringResolver
 
 class ConflictResolverRegistry:

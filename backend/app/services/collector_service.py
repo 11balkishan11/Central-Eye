@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy import update, or_, and_
+from sqlalchemy import or_, and_
 from uuid import UUID
 import uuid
 from datetime import datetime, timezone, timedelta
@@ -39,7 +39,7 @@ class CollectorService:
             stmt = stmt.where(
                 or_(
                     CollectorJob.site_id == collector.site_id,
-                    CollectorJob.site_id == None
+                    CollectorJob.site_id.is_(None)
                 )
             )
             

@@ -1,6 +1,5 @@
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 import uuid
-from datetime import datetime, timezone
 
 class PollingScheduler:
     """

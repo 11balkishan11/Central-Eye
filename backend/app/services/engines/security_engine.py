@@ -1,6 +1,6 @@
 import time
 from typing import Dict, Any, List, Optional
-from app.models.resource import Resource, Fact
+from app.models.resource import Resource
 from app.services.engines.base_engine import BaseEngine, EvaluationResult, EvaluationRequest
 from app.services.engines.engine_registry import EngineRegistry, EngineMetadata
 from app.services.operator_registry import OperatorRegistry

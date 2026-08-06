@@ -7,7 +7,6 @@ from app.services.events.event_publisher import EventPublisher
 from app.services.events.taxonomy import PlatformEventType
 from app.models.platform_event import PlatformEvent
 from app.models.incident import Incident
-from app.services.correlation.incident_aggregator import IncidentAggregator
 from app.services.correlation.incident_lifecycle import IncidentLifecycleManager
 from app.services.correlation.correlation_rules import CorrelationRules
 

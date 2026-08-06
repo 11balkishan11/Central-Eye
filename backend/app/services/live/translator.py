@@ -3,7 +3,6 @@ import uuid
 import datetime
 
 from app.services.live.protocol import PresentationEventV1, DeviceUpdatedV1
-from app.services.projections.models import ProjectionContext
 from app.models.projections import InventoryProjectionModel
 from sqlalchemy.orm import Session
 

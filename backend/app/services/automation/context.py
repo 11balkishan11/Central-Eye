@@ -1,4 +1,4 @@
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 import uuid
 from pydantic import Field
 from app.services.knowledge.models import InfrastructureKnowledge

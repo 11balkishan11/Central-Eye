@@ -1,5 +1,4 @@
 import asyncio
-from sqlalchemy.ext.asyncio import AsyncSession
 from app.db.session import async_session_maker
 from app.models.tenant import Tenant, TenantTier, TenantStatus, TenantMembership, TenantMembershipStatus
 from app.models.rbac import Role

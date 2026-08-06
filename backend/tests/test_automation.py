@@ -1,10 +1,8 @@
 import uuid
 import pytest
-from unittest.mock import MagicMock
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone
 
-from app.models.automation import AutomationPlan, AutomationExecution, ExecutionStepResult
+from app.models.automation import AutomationPlan, AutomationExecution
 from app.services.automation.context import ExecutionContext
 from app.services.automation.registry import AutomationRegistry
 from app.services.automation.actions.mock_actions import MockSSHAction, MockRESTAction, FailureAction

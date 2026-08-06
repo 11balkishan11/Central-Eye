@@ -1,12 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
-from typing import Any, List
-import uuid
+from typing import Any
 
 from app.db.session import get_db
-from app.models.resource import Resource, ResourceState, Relationship, RelationshipState
+from app.models.resource import Resource, Relationship
 
 router = APIRouter()
 

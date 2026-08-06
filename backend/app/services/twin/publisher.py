@@ -1,7 +1,5 @@
 from typing import List
 from sqlalchemy.orm import Session
-import uuid
-import datetime
 
 from app.models.digital_twin import FactVersion
 from app.models.events import OutboxEvent

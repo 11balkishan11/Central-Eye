@@ -8,8 +8,6 @@ from app.services.queries.schema import QueryRequestV1, QueryFilter, FilterOp, Q
 from app.services.queries.cache import MemoryQueryCache
 from app.services.queries.engine import QueryEngine
 # Ensure handlers are imported to register themselves
-import app.services.queries.handlers.inventory 
-import app.services.queries.handlers.topology
 
 from app.services.bff.screen_engine import ScreenEngine, ScreenConfig, WidgetConfig
 

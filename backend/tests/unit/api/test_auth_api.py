@@ -1,15 +1,10 @@
 import pytest
 import pytest_asyncio
 from httpx import AsyncClient, ASGITransport
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy.orm import sessionmaker
 import uuid
 
 from app.main import app
-from app.db.base_class import Base
-from app.db.session import get_db
 from app.models.user import User, UserStatus
-from app.models.tenant import Tenant, TenantStatus
 from app.auth.password_service import PasswordService
 
 

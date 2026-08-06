@@ -1,9 +1,6 @@
 import pytest
-import asyncio
-from datetime import datetime, timezone
 import uuid
 from app.services.engines.engine_registry import EngineRegistry
-from app.services.engines.base_engine import EvaluationRequest, EvaluationContext
 from app.services.evaluation_engine import EvaluationOrchestrator
 from app.models.policy import PolicyVersion, Policy, PolicyAssignment
 from app.models.resource import Resource
@@ -11,7 +8,6 @@ from app.models.resource import Resource
 def test_engine_registry_loads_all_engines():
     """Verify that all three engine types can be registered without changing orchestrator code."""
     # Ensure they are imported and registered
-    import app.services.engines
 
     metadata = EngineRegistry.list_metadata()
     engine_ids = [m.id for m in metadata]

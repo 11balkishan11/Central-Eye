@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import asc
-from typing import Optional, List
-import uuid
+from typing import Optional
 from datetime import datetime
 
 from app.models.events import StoredEvent

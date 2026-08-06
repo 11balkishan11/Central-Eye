@@ -1,8 +1,9 @@
 import uuid
+# ruff: noqa: F821
 from datetime import datetime, timezone
 from typing import Dict, Any, List, Optional
 
-from sqlalchemy import String, DateTime, Boolean, Integer, ForeignKey, Index
+from sqlalchemy import String, DateTime, Boolean, Integer, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 

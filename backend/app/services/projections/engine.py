@@ -1,4 +1,4 @@
-from typing import Dict, Any, List
+from typing import List
 from sqlalchemy.orm import Session
 import uuid
 import datetime
@@ -8,7 +8,6 @@ from app.services.projections.registry import ProjectionRegistry
 from app.services.projections.models import ProjectionContext, ProjectionHealth
 from app.services.events.checkpoint_store import CheckpointStore
 from app.models.events import DeadLetter
-from app.models.events import StoredEvent
 from app.services.live.broadcaster import presentation_bus
 
 class ProjectionEngine:

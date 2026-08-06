@@ -1,5 +1,4 @@
-from typing import Dict, Any, Callable, Type
-import functools
+from typing import Dict, Any, Type
 from pydantic import BaseModel
 
 class QueryMetadata(BaseModel):

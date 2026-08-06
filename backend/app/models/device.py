@@ -5,7 +5,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Optional, List, TYPE_CHECKING
 
-from sqlalchemy import String, Enum, ForeignKey, DateTime, Float, Integer, Boolean, UniqueConstraint, Index, text, func
+from sqlalchemy import String, Enum, ForeignKey, DateTime, Float, Integer, Boolean, UniqueConstraint, Index, text
 from sqlalchemy.dialects.postgresql import INET, MACADDR, JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 

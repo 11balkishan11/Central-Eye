@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 
 from app.db.session import get_db
-from app.models.automation import AutomationPlan, AutomationExecution
+from app.models.automation import AutomationExecution
 from app.services.automation.planner import AutomationPlanner
 from app.services.automation.governance import PolicyGuard, ApprovalEngine
 from app.services.automation.execution_engine import ExecutionEngine

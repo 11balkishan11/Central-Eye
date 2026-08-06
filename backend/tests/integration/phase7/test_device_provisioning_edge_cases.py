@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 from app.models.event import OutboxEvent
 from app.models.device import Device, DeviceLifecycleState
-from app.models.tenant import Organization, Site, SiteStatus
+from app.models.tenant import Site, SiteStatus
 
 from datetime import datetime, timezone
 

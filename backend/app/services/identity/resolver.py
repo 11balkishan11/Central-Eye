@@ -29,7 +29,7 @@ class IdentityResolver:
             # for O(1) lookups instead of scanning FactVersion JSON payloads.
             matching_facts = self.db.query(FactVersion).filter(
                 FactVersion.tenant_id == tenant_id,
-                FactVersion.valid_to == None,
+                FactVersion.valid_to.is_(None),
                 # Simple mapping: identity_type lowercased is usually the fact_group_id
                 FactVersion.fact_group_id == candidate.identity_type.lower()
             ).all()

@@ -1,6 +1,4 @@
-import uuid
 import pytest
-from unittest.mock import MagicMock
 
 from app.services.ai.registry import AIRegistry
 from app.services.ai.provider import MockAIProvider
@@ -9,7 +7,6 @@ from app.services.ai.reasoning_pipeline import ReasoningPipeline
 from app.services.knowledge.models import InfrastructureKnowledge
 
 # Make sure agents are imported
-import app.services.ai.agents.executive_summary_agent
 
 def test_mock_pipeline_execution():
     """

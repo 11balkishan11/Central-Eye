@@ -1,5 +1,4 @@
 import uuid
-from typing import Dict, Any
 from sqlalchemy.orm import Session
 
 from app.services.knowledge.models import InfrastructureKnowledge, KnowledgeQueryProfile

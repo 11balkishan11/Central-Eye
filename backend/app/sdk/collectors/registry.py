@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import List
 from app.sdk.collectors.base import BaseCollector
 from app.sdk.plugin import BasePluginRegistry
 

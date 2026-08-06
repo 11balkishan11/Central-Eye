@@ -1,4 +1,4 @@
-from typing import Dict, Any, Type, TypeVar, Generic
+from typing import Dict, TypeVar, Generic
 from pydantic import BaseModel
 
 class PluginMetadata(BaseModel):

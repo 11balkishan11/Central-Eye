@@ -1,11 +1,8 @@
-from typing import Dict, Any, List
 from datetime import datetime, timezone
 from sqlalchemy.orm import Session
-from sqlalchemy import text
-import uuid
 
 from app.models.observation import Observation
-from app.models.digital_twin import FactVersion, ResourceLifecycleState
+from app.models.digital_twin import FactVersion
 from app.services.twin.resolvers.registry import ConflictResolverRegistry
 
 from app.services.twin.publisher import TwinPublisher
@@ -29,7 +26,7 @@ class TwinTransactionManager:
             # 1. Fetch current active facts for this resource
             current_facts = self.db.query(FactVersion).filter(
                 FactVersion.resource_id == observation.resource_id,
-                FactVersion.valid_to == None
+                FactVersion.valid_to.is_(None)
             ).all()
             current_facts_dict = {f.fact_group_id: f for f in current_facts}
             

@@ -1,6 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Dict, Any, Optional
-import uuid
+from typing import Dict
 
 class CredentialReference(BaseModel):
     provider: str = Field(description="e.g. 'vault', 'aws_secrets', 'env'")

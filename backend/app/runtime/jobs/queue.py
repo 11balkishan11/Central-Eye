@@ -20,8 +20,8 @@ class JobQueue(ABC):
         pass
 
 
-from app.runtime.policy import RuntimePolicyEngine
-from app.runtime.context import RuntimeContext
+from app.runtime.policy import RuntimePolicyEngine  # noqa: E402
+from app.runtime.context import RuntimeContext  # noqa: E402
 
 class MemoryJobQueue(JobQueue):
     """

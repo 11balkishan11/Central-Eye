@@ -1,6 +1,5 @@
 import asyncio
 import uuid
-from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.services.workers.manager import BaseWorker
 from app.models.events import OutboxEvent, StoredEvent

@@ -1,14 +1,13 @@
 import asyncio
-from datetime import datetime, timezone, timedelta
-from sqlalchemy.future import select
+from datetime import datetime, timezone
 from sqlalchemy import update
 from app.db.session import async_session_maker
-from app.models.device import Collector, CollectorRegistrationKey
+from app.models.device import CollectorRegistrationKey
 
 async def collector_cleanup_task():
     while True:
         try:
-            async with async_session_maker() as db:
+            async with async_session_maker():
                 # We don't have a status column anymore, so we don't need to do anything here for collectors!
                 # Wait, the prompt said: "mark offline". But I also suggested "Derived Online Status: Never store status = online... Compute NOW - heartbeat".
                 # If we use Derived Online Status, we don't need a background job to mark them offline. It's computed at query time!
@@ -31,7 +30,7 @@ async def registration_key_cleanup_task():
                 await db.execute(
                     update(CollectorRegistrationKey)
                     .where(CollectorRegistrationKey.expires_at < now)
-                    .where(CollectorRegistrationKey.revoked_at == None)
+                    .where(CollectorRegistrationKey.revoked_at.is_(None))
                     .values(revoked_at=now)
                 )
                 await db.commit()

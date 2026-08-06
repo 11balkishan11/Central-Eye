@@ -1,6 +1,4 @@
-import pytest
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone
 
 from app.models.observation import Observation
 from app.models.digital_twin import FactVersion

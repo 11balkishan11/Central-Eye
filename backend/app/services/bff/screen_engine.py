@@ -1,10 +1,8 @@
 from typing import Dict, Any, List
 from sqlalchemy.orm import Session
-import asyncio
 
 from app.services.queries.engine import QueryEngine
 from app.services.queries.schema import QueryRequestV1, QueryContext
-from app.services.queries.registry import QueryRegistry
 
 class WidgetConfig:
     def __init__(self, id: str, title: str, query: QueryRequestV1, component: str):

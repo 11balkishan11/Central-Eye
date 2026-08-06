@@ -2,7 +2,6 @@ from pydantic import BaseModel, Field, ConfigDict, field_serializer
 from typing import Optional, List, Any
 import uuid
 from datetime import datetime
-from ipaddress import IPv4Address, IPv6Address
 
 from app.models.device import (
     DeviceLifecycleState, 

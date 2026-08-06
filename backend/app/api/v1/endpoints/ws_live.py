@@ -1,5 +1,4 @@
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-from typing import Dict, Any
 
 from app.services.live.session import LiveSession, LiveSessionContext, session_manager
 from app.services.live.subscriptions import subscription_engine, Subscription

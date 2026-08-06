@@ -1,7 +1,6 @@
-from fastapi import Depends, Request, HTTPException
+from fastapi import Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
-from typing import Optional
 import uuid
 from sqlalchemy.future import select
 

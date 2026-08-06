@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Any, List
+from typing import List
 from app.services.ai.schemas import AIRequest, AIResponse
 
 class AIProvider(ABC):
@@ -19,7 +19,6 @@ class MockAIProvider(AIProvider):
         return ["structured_output"]
         
     def execute(self, request: AIRequest, rendered_prompt: str, system_prompt: str) -> AIResponse:
-        import time
         from app.services.ai.schemas import Citation
         
         # In a real provider, we'd parse the LLM JSON output.

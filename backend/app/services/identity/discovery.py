@@ -1,7 +1,6 @@
 import uuid
 from sqlalchemy.orm import Session
 from app.models.resource import Resource
-from app.models.digital_twin import ResourceLifecycleState
 
 class DiscoveryEngine:
     """

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import asc, desc, func
+from sqlalchemy import asc, desc
 from typing import Tuple, List, Dict, Any, Optional
 
 from app.services.queries.registry import query

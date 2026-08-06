@@ -1,6 +1,5 @@
-import uuid
 from typing import Dict, Any, Optional
-from datetime import datetime, timezone
+from datetime import datetime
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import event

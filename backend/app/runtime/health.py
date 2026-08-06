@@ -1,4 +1,4 @@
-from typing import Dict, Any, Callable, List
+from typing import Dict, Any, Callable
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 

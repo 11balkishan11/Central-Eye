@@ -4,7 +4,6 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.models.event import OutboxEvent
-from app.models.device import Device, DeviceLifecycleState
 
 @pytest.mark.asyncio
 async def test_device_provisioning_flow(

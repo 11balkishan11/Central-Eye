@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.api.v1.endpoints import (
-    health, organizations, sites, invitations, devices, lookups, auth, collectors, observations, knowledge_graph, policies, findings, resources, resource_explorer, events, incidents, intelligence, automation, projections, query, screen, ws_live
+    health, organizations, sites, invitations, devices, lookups, auth, collectors, observations, knowledge_graph, policies, findings, resources, events, incidents, intelligence, automation, projections, query, screen, ws_live
 )
 
 api_router = APIRouter()

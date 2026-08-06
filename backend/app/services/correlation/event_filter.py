@@ -1,4 +1,3 @@
-from typing import List
 from sqlalchemy.orm import Session
 from app.models.platform_event import PlatformEvent
 from app.services.events.taxonomy import PlatformEventType

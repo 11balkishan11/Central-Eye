@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from datetime import timedelta
 from app.models.platform_event import PlatformEvent
 from app.models.incident import Incident
 

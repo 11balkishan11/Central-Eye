@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Generator, Optional
 from pydantic import BaseModel
-from datetime import datetime, timezone
-import uuid
+from datetime import datetime
 
 from app.services.collectors.envelope import ObservationEnvelope
 

@@ -1,5 +1,4 @@
 import asyncio
-from sqlalchemy.orm import Session
 from datetime import datetime, timedelta, timezone
 from app.database import SessionLocal
 from app.services.workers.manager import BaseWorker

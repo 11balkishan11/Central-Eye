@@ -1,7 +1,6 @@
 from sqlalchemy.orm import Session
 import time
 import hashlib
-import json
 
 from app.services.queries.schema import QueryRequestV1, QueryResponseV1, QueryContext
 from app.services.queries.registry import QueryRegistry

@@ -1,4 +1,3 @@
-from typing import Dict, Any
 from app.models.observation import Observation
 
 class Normalizer:

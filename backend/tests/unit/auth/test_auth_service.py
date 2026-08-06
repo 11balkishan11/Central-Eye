@@ -206,7 +206,7 @@ async def test_auth_service_token_reuse(auth_env):
     result = await auth_service.login(user.email, "securepassword123")
     
     # Normal rotation
-    refresh_result = await auth_service.refresh(result.refresh_token)
+    await auth_service.refresh(result.refresh_token)
     
     # Attacker uses raw_refresh_1 again
     with pytest.raises(RefreshReuseDetectedError):

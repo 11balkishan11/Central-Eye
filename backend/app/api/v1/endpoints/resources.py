@@ -1,5 +1,5 @@
 import uuid
-from typing import Any, List
+from typing import Any
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -32,12 +32,12 @@ def get_resource_policies(
     # Get all policies assigned to this resource (simplified: get all active policies for tenant for now, 
     # since we don't have complex assignment matching yet in the minimal slice)
     # Actually, let's query PolicyAssignment if they exist.
-    assignments = db.query(PolicyAssignment).filter(
+    _ = db.query(PolicyAssignment).filter(
         PolicyAssignment.target_type == "network_device"  # Hardcoded for Sprint 1 minimal slice
     ).all()
     
     # Let's get active policies for the tenant
-    policies = db.query(Policy).filter(Policy.tenant_id == tenant_id, Policy.is_active == True).all()
+    policies = db.query(Policy).filter(Policy.tenant_id == tenant_id, Policy.is_active.is_(True)).all()
     
     results = []
     

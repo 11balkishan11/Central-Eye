@@ -1,13 +1,11 @@
 import pytest
-import asyncio
-from typing import Dict, Any
+from typing import Any
 
 from app.services.live.protocol import PresentationEventV1
 from app.services.live.coalescer import PriorityCoalescer
 from app.services.live.delta import DeltaEngine
 from app.services.live.permissions import AuthorizationFilter
 from app.services.live.session import LiveSession, LiveSessionContext, SessionManager
-from fastapi import WebSocket
 
 class MockWebSocket:
     def __init__(self):

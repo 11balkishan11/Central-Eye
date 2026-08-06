@@ -1,7 +1,7 @@
 import asyncio
 from sqlalchemy import select
 from app.db.session import async_session_maker
-from app.models.device import Device, DeviceOperState
+from app.models.device import Device
 
 async def main():
     async with async_session_maker() as session:
