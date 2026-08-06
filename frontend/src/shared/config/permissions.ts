@@ -8,7 +8,9 @@ import {
   Users, 
   Settings,
   Search,
-  Network
+  Network,
+  Shield,
+  FileWarning
 } from "lucide-react"
 
 export interface NavItem {
@@ -25,6 +27,8 @@ export const navigationConfig: NavItem[] = [
   { label: "Devices", path: "/devices", icon: Server, permission: "devices:read" },
   { label: "Discovery", path: "/discovery", icon: Search, permission: "devices:read" },
   { label: "Topology", path: "/topology", icon: Network, permission: "devices:read" },
+  { label: "Policies", path: "/policies", icon: Shield, permission: "devices:read" },
+  { label: "Drift Findings", path: "/drift", icon: FileWarning, permission: "devices:read" },
   { label: "Collectors", path: "/collectors", icon: Activity, permission: "collectors:read" },
   { label: "Alerts", path: "/alerts", icon: Bell, permission: "alerts:read" },
   { label: "Users", path: "/users", icon: Users, permission: "users:read" },

@@ -1,0 +1,29 @@
+name: Discoveries API
+description: Endpoints for managing and triggering network discovery sessions.
+endpoints:
+  - id: create-discovery
+    method: POST
+    path: /api/v1/discoveries
+    summary: Create a Discovery Session
+    description: Triggers a new asynchronous discovery session across the specified target subnets or IP ranges using the defined protocols.
+    parameters:
+      - name: targets
+        type: array of strings
+        required: true
+        description: List of CIDR blocks or IP addresses to scan.
+      - name: protocols
+        type: array of strings
+        required: false
+        description: List of protocols to use (e.g., ICMP, SNMP, LLDP). Defaults to all available.
+    requestBody: |
+      {
+        "targets": ["10.0.0.0/24", "192.168.1.1"],
+        "protocols": ["ICMP", "SNMP"]
+      }
+    responseBody: |
+      {
+        "id": "dsc_9a8b7c6d",
+        "status": "queued",
+        "targets": ["10.0.0.0/24", "192.168.1.1"],
+        "created_at": "2026-07-27T10:00:00Z"
+      }

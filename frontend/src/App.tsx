@@ -10,6 +10,8 @@ import { DiscoveryPage } from "./features/discovery/pages/DiscoveryPage"
 import { TopologyPage } from "./features/topology/pages/TopologyPage"
 import { AlertsPage } from "./features/alerts/pages/AlertsPage"
 import { DesignSystemPage } from "./features/design-system/pages/DesignSystemPage"
+import { PolicyPage } from "./features/policy/pages/PolicyPage"
+import { DriftPage } from "./features/drift/pages/DriftPage"
 import { AppLayout } from "./shared/components/layout/AppLayout"
 import { ProtectedRoute } from "./shared/components/layout/ProtectedRoute"
 
@@ -35,6 +37,8 @@ function App() {
               <Route path="/devices/:id" element={<DeviceDetailsPage />} />
               <Route path="/discovery" element={<DiscoveryPage />} />
               <Route path="/topology" element={<TopologyPage />} />
+              <Route path="/policies" element={<PolicyPage />} />
+              <Route path="/drift" element={<DriftPage />} />
               <Route path="/alerts" element={<AlertsPage />} />
               <Route path="/design-system" element={<DesignSystemPage />} />
             </Route>

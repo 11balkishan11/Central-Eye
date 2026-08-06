@@ -2,6 +2,7 @@ import asyncio
 import uuid
 from client import get_client
 from logger import setup_logger
+from workers.icmp import ping_target
 
 logger = setup_logger()
 
@@ -28,11 +29,25 @@ async def execute_job(config, tokens, job):
         logger.error(f'Failed to start job {job_id}: {e}')
         return
         
-    # Simulate execution
-    await asyncio.sleep(1)
-    result_data = {"status": "ok", "latency_ms": 12}
+    # 2. Execute Job
+    job_type = job.get('type')
+    payload = job.get('payload', {})
     
-    # 2. Complete Job
+    result_data = {"status": "error", "error": "Unknown job type"}
+    
+    if job_type == "ICMP_PING":
+        target_ip = payload.get("target_ip")
+        if target_ip:
+            logger.info(f"Executing ICMP Ping against {target_ip}")
+            result_data = await ping_target(target_ip)
+        else:
+            result_data = {"status": "error", "error": "Missing target_ip in payload"}
+    else:
+        # Simulate execution for other types
+        await asyncio.sleep(1)
+        result_data = {"status": "ok", "latency_ms": 12, "note": "simulated"}
+    
+    # 3. Complete Job
     try:
         async with get_client(config) as client:
             headers = {

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, ConfigDict
+from pydantic import BaseModel, ConfigDict
 from typing import Optional, Generic, TypeVar, Any
 import uuid
 from datetime import datetime
@@ -23,14 +23,14 @@ class ErrorResponse(BaseModel):
     error: ErrorDetail
 
 class LoginRequest(BaseModel):
-    email: EmailStr
+    email: str
     password: str
     device_info: Optional[dict[str, Any]] = None
 
 class UserResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: uuid.UUID
-    email: EmailStr
+    email: str
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     status: UserStatus

@@ -8,7 +8,7 @@ from typing import cast, Dict, Any
 from fastapi import HTTPException
 
 from app.models.device import Collector
-from app.models.job import CollectorJob, JobStatus, CollectorEvent, CollectorEventType
+from app.models.job import CollectorJob, JobStatus, JobType, CollectorEvent, CollectorEventType
 from app.schemas.jobs import (
     JobPullRequest, JobPullResponse, JobDefinition,
     JobStartRequest, JobCompleteRequest, JobFailRequest, JobGenericResponse
@@ -26,19 +26,24 @@ class CollectorService:
         # We will attempt to lease up to `request.available_capacity` jobs
         now = datetime.now(timezone.utc)
         
-        # Find pending jobs (or expired leases) for this tenant/site
-        # For scale, this should use CTEs and FOR UPDATE SKIP LOCKED, but standard select is fine for MVP.
+        # Build query
         stmt = select(CollectorJob).where(
             CollectorJob.tenant_id == collector.tenant_id,
-            or_(
-                CollectorJob.site_id == collector.site_id,
-                CollectorJob.site_id == None
-            ),
             or_(
                 CollectorJob.status == JobStatus.PENDING,
                 and_(CollectorJob.status == JobStatus.LEASED, CollectorJob.lease_expires_at < now)
             )
-        ).order_by(CollectorJob.priority.desc(), CollectorJob.scheduled_at.asc()).limit(request.available_capacity)
+        )
+        
+        if collector.site_id:
+            stmt = stmt.where(
+                or_(
+                    CollectorJob.site_id == collector.site_id,
+                    CollectorJob.site_id == None
+                )
+            )
+            
+        stmt = stmt.order_by(CollectorJob.priority.desc(), CollectorJob.scheduled_at.asc()).limit(request.available_capacity)
         
         result = await self.db.execute(stmt)
         jobs_to_lease = result.scalars().all()
@@ -108,6 +113,22 @@ class CollectorService:
         job.status = JobStatus.COMPLETED
         job.finished_at = datetime.now(timezone.utc)
         job.result = request.result
+        
+        if job.type == JobType.ICMP_PING:
+            device_id_str = cast(Dict[str, Any], job.payload).get("device_id")
+            if device_id_str:
+                try:
+                    device_id_obj = UUID(device_id_str)
+                    from app.models.device import Device, DeviceOperState
+                    device = await self.db.get(Device, device_id_obj)
+                    if device:
+                        if request.result and request.result.get("status") == "up":
+                            device.oper_state = DeviceOperState.up
+                            device.last_seen = datetime.now(timezone.utc)
+                        else:
+                            device.oper_state = DeviceOperState.down
+                except ValueError:
+                    pass
         
         event = CollectorEvent(
             tenant_id=collector.tenant_id,

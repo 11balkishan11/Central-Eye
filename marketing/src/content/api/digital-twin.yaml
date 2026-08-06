@@ -1,0 +1,29 @@
+name: Digital Twin API
+description: Endpoints for querying and traversing the Reality Graph and Intent Graph.
+endpoints:
+  - id: get-digital-twin
+    method: GET
+    path: /api/v1/digital-twin
+    summary: Retrieve the Topology Graph
+    description: Returns the current Reality Graph topology, including all nodes and their L2/L3 relationships within the specified scope.
+    parameters:
+      - name: site_id
+        type: string
+        required: false
+        description: Filter the topology by a specific site or datacenter ID.
+      - name: depth
+        type: integer
+        required: false
+        description: Number of hops to include in the graph traversal. Defaults to 3.
+    requestBody: |
+      
+    responseBody: |
+      {
+        "nodes": [
+          { "id": "fw-core-01", "type": "firewall", "ip": "10.0.0.1" },
+          { "id": "sw-dist-01", "type": "switch", "ip": "10.0.0.2" }
+        ],
+        "links": [
+          { "source": "fw-core-01", "target": "sw-dist-01", "protocol": "LLDP" }
+        ]
+      }

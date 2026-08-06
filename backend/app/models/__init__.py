@@ -10,6 +10,15 @@ from app.models.device import (
 )
 from app.models.event import OutboxEvent
 from app.models.job import CollectorJob, CollectorEvent
+from app.models.resource import (
+    Observation, Fact, Resource, ResourceAlias,
+    ResourceState, Relationship, RelationshipState
+)
+from app.models.policy import Policy, PolicyVersion, PolicyAssignment
+from app.models.finding import PolicyEvaluation, Finding, FindingState, Evidence
+from app.models.platform_event import PlatformEvent
+from app.models.incident import Incident
+from app.models.automation import AutomationPlan, AutomationExecution, ExecutionStepResult
 
 # For Alembic autogenerate to discover the models
 __all__ = [
@@ -42,4 +51,20 @@ __all__ = [
     "OutboxEvent",
     "CollectorJob",
     "CollectorEvent",
+    "Observation",
+    "Fact",
+    "Resource",
+    "ResourceAlias",
+    "ResourceState",
+    "Relationship",
+    "RelationshipState",
+    "Policy",
+    "PolicyVersion",
+    "PolicyAssignment",
+    "PolicyEvaluation",
+    "Finding",
+    "FindingState",
+    "Evidence",
+    "PlatformEvent",
+    "Incident",
 ]

@@ -1,0 +1,33 @@
+name: Simulation API
+description: Endpoints for simulating network topology changes and outages.
+endpoints:
+  - id: run-simulation
+    method: POST
+    path: /api/v1/simulate
+    summary: Execute "What If" Simulation
+    description: Spawns a lightweight clone of the Reality Graph in memory and applies the requested state changes (e.g., node down, link cut) to calculate blast radius and convergence.
+    parameters:
+      - name: action
+        type: string
+        required: true
+        description: The type of failure to simulate (e.g., NODE_DOWN, LINK_CUT, CONFIG_CHANGE).
+      - name: target_id
+        type: string
+        required: true
+        description: The UUID of the device, link, or BGP session to target.
+    requestBody: |
+      {
+        "action": "NODE_DOWN",
+        "target_id": "fw-core-01"
+      }
+    responseBody: |
+      {
+        "simulation_id": "sim_8f9e0a1b",
+        "blast_radius": {
+          "disconnected_nodes": 142,
+          "orphaned_bgp_sessions": 14,
+          "impacted_applications": ["SAP", "HR Portal"]
+        },
+        "convergence_time_ms": 1240,
+        "recommendation": "Update OSPF cost on backup link ny-core-02."
+      }

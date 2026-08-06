@@ -4,6 +4,7 @@ from config import load_config
 from auth import register_or_load_tokens
 from heartbeat import heartbeat_loop
 from jobs import jobs_loop
+from discovery import discovery_loop
 
 logger = setup_logger()
 
@@ -22,7 +23,8 @@ async def main():
     # Start tasks
     tasks = [
         asyncio.create_task(heartbeat_loop(config, tokens)),
-        asyncio.create_task(jobs_loop(config, tokens))
+        asyncio.create_task(jobs_loop(config, tokens)),
+        asyncio.create_task(discovery_loop(config, tokens))
     ]
     
     await asyncio.gather(*tasks)
